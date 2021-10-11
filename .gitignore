@@ -122,3 +122,6 @@ venv.bak/
 
 # mac book
 .DS_Store
+
+#Pycharm
+.idea

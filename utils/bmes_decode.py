@@ -35,38 +35,84 @@ def bmes_decode(char_label_list: List[Tuple[str, str]]) -> List[Tag]:
         >>> bmes_decode(x)
         [{'term': 'Beijing', 'tag': 'LOC', 'begin': 1, 'end': 2}]
     """
+    # print('char_label_list: ', char_label_list)
     idx = 0
     length = len(char_label_list)
     tags = []
+    term_meger = ''
+    start = 0
+    end = 0
+    # lặp từng kí tự
     while idx < length:
+        # Lấy term, label hiện tại
         term, label = char_label_list[idx]
         current_label = label[0]
 
-        # correct labels
-        if idx + 1 == length and current_label == "B":
-            current_label = "S"
+        # Nếu từ hiện tại có nhãn = O
+        if current_label == 'O':
+            idx += 1
+            continue
 
-        # merge chars
-        if current_label == "O":
-            idx += 1
-            continue
-        if current_label == "S":
-            tags.append(Tag(term, label[2:], idx, idx + 1))
-            idx += 1
-            continue
-        if current_label == "B":
-            end = idx + 1
-            while end + 1 < length and char_label_list[end][1][0] == "M":
-                end += 1
-            if char_label_list[end][1][0] == "E":  # end with E
-                entity = "".join(char_label_list[i][0] for i in range(idx, end + 1))
-                tags.append(Tag(entity, label[2:], idx, end + 1))
-                idx = end + 1
-            else:  # end with M/B
-                entity = "".join(char_label_list[i][0] for i in range(idx, end))
-                tags.append(Tag(entity, label[2:], idx, end))
-                idx = end
-            continue
+        if current_label == 'B':
+            start = idx
+            end = idx
+            term_meger = term_meger + ' ' + term
+
+        if current_label == "I":
+            end = idx
+            term_meger = term_meger + ' ' + term
+
+        # Lấy nhãn tiếp theo
+        if idx + 1 == length:
+            tags.append(Tag(term_meger.strip(), label[2:], start, end))
+            term_meger = ''
         else:
-            raise Exception("Invalid Inputs")
+            _, next_label = char_label_list[idx + 1]
+            if next_label == 'O':
+                tags.append(Tag(term_meger.strip(), label[2:], start, end))
+                term_meger = ''
+        idx += 1
     return tags
+
+
+def bos_decode(char_label_list):
+    # print('char_label_list: ', char_label_list)
+    idx = 0
+    length = len(char_label_list)
+    tags = []
+    term_meger = ''
+    start = 0
+    end = 0
+    # lặp từng kí tự
+    while idx < length:
+        # Lấy term, label hiện tại
+        term, label = char_label_list[idx]
+        current_label = label[0]
+
+        # Nếu từ hiện tại có nhãn = O
+        if current_label == 'O':
+            idx += 1
+            continue
+
+        if current_label == 'B':
+            start = idx
+            end = idx
+            term_meger = term_meger + ' ' + term
+
+        if current_label == "I":
+            end = idx
+            term_meger = term_meger + ' ' + term
+
+        # Lấy nhãn tiếp theo
+        if idx + 1 == length:
+            tags.append(Tag(term_meger.strip(), label[2:], start, end))
+            term_meger = ''
+        else:
+            _, next_label = char_label_list[idx + 1]
+            if next_label == 'O':
+                tags.append(Tag(term_meger.strip(), label[2:], start, end))
+                term_meger = ''
+
+        idx += 1
+    return tags
+

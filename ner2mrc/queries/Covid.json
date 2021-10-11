@@ -1,0 +1,12 @@
+{
+    "PATIENT_ID": "Mã định danh duy nhất của một bệnh nhân COVID-19 tại Việt Nam.",
+    "NAME": "Tên bệnh nhân hoặc người tiếp xúc với bệnh nhân.",
+    "AGE": "Tuổi của bệnh nhân hoặc người tiếp xúc với bệnh nhân.",
+    "GENDER": "Giới tính của bệnh nhân hoặc người tiếp xúc với bệnh nhân.",
+    "JOB": "Công việc của bệnh nhân hoặc người tiếp xúc với bệnh nhân.",
+    "ORGANIZATION": "Các tổ chức liên quan đến bệnh nhân, ví dụ: công ty, tổ chức chính phủ,...",
+    "LOCATION": "Các vị trí, địa điểm mà một bệnh nhân đã tới.",
+    "DATE": "Thời gian.",
+    "SYMPTOM_AND_DISEASE": "Các triệu chứng mà bệnh nhân gặp phải và các bệnh mà bệnh nhân mắc phải trước đó COVID-19 hoặc các biến chứng thường xuất hiện trong các báo cáo tử vong.",
+    "TRANSPORTATION": "Phương tiện vận chuyển mà bệnh nhân đã sử dụng, ví dụ: số chuyến bay và biển số xe buýt, xe hơi."
+}
