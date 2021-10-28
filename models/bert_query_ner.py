@@ -5,8 +5,7 @@
 
 import torch
 import torch.nn as nn
-from transformers import BertModel, BertPreTrainedModel
-
+from transformers import BertModel, BertPreTrainedModel, RobertaModel
 from models.classifier import MultiNonLinearClassifier
 
 
