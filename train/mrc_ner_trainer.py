@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+import sys
+sys.path.append('E:\Toan\mrc-for-flat-nested-ner-master')
 # file: mrc_ner_trainer.py
-
 import os
 import re
 import argparse

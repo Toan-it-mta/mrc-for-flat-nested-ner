@@ -5,17 +5,19 @@
 
 import os
 import re
+import sys
+sys.path.append('E:\\Toan\\mrc-for-flat-nested-ner-master')
 import argparse
 import logging
 from collections import namedtuple
 from typing import Dict
-
 import torch
 import pytorch_lightning as pl
 from pytorch_lightning import Trainer
 from pytorch_lightning.callbacks.model_checkpoint import ModelCheckpoint
 # from tokenizers import BertWordPieceTokenizer
-from utils import PhoBertBPETokenizer
+
+from utils.PhoBertBPETokenizer import PhoBertBPETokenizer
 from torch import Tensor
 from torch.nn.modules import CrossEntropyLoss, BCEWithLogitsLoss
 from torch.utils.data import DataLoader
@@ -161,7 +163,7 @@ class PhoBertLabeling(pl.LightningModule):
         return [optimizer], [{"scheduler": scheduler, "interval": "step"}]
 
     def forward(self, input_ids, attention_mask, token_type_ids):
-        return self.model(input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids)
+        return self.model(input_ids, attention_mask=attention_mask)
 
     def compute_loss(self, start_logits, end_logits, span_logits,
                      start_labels, end_labels, match_labels, start_label_mask, end_label_mask):

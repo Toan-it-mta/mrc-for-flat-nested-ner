@@ -2,13 +2,13 @@
 
 
 TIME=0901
-FILE=conll03_cased_large
-REPO_PATH=/mnt/e/code/Python/mrc-for-flat-nested-ner
+FILE=covid19
+REPO_PATH=/mnt/e/Toan/mrc-for-flat-nested-ner-master
 export PYTHONPATH="$PYTHONPATH:$REPO_PATH"
 
-DATA_DIR=/mnt/e/code/Python/mrc-for-flat-nested-ner/data/datasets/ner
-BERT_DIR=/mnt/e/code/Python/mrc-for-flat-nested-ner/data/models/bert-base-uncased
-OUTPUT_BASE=/mnt/e/code/Python/mrc-for-flat-nested-ner/data/ouputs
+DATA_DIR=/mnt/e/Toan/mrc-for-flat-nested-ner-master/data/datasets/ner-Covid19/data/new_type
+BERT_DIR=/mnt/e/Toan/mrc-for-flat-nested-ner-master/data/models/phobert-base
+OUTPUT_BASE=E:/mnt/e/Toan/mrc-for-flat-nested-ner-master/data/ouputs
 
 BATCH=2
 GRAD_ACC=4
@@ -33,7 +33,8 @@ SPAN_CAND=pred_and_gold
 OUTPUT_DIR=${OUTPUT_BASE}/mrc_ner/${TIME}/${FILE}_cased_large_lr${LR}_drop${MRC_DROPOUT}_norm${MAXNORM}_weight${SPAN_WEIGHT}_warmup${WARMUP}_maxlen${MAXLEN}
 mkdir -p ${OUTPUT_DIR}
 
-python3.7 ${REPO_PATH}/train/mrc_ner_trainer.py \
+CUDA_VISIBLE_DEVICES=0 python ${REPO_PATH}/train/mrc_ner_trainer.py \
+--gpus="1" \
 --data_dir ${DATA_DIR} \
 --bert_config_dir ${BERT_DIR} \
 --max_length ${MAX_LEN} \

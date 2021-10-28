@@ -191,7 +191,7 @@ def run_dataset():
     # en datasets
     bert_path = "E:\\Code\\Python\\mrc-for-flat-nested-ner\\data\\models\\phobert-base"
     # json_path = "/mnt/mrc/ace2004/mrc-ner.train"
-    json_path = "E:\\Code\\Python\\mrc-for-flat-nested-ner\\data\\datasets\\ner-Covid19\\data\\new_type\\mrc-ner.train_word"
+    json_path = "E:\\Code\\Python\\mrc-for-flat-nested-ner\\data\\datasets\\ner-Covid19\\data\\new_type\\mrc-ner.train"
     is_chinese = False
 
     vocab_file = os.path.join(bert_path, "vocab.txt")
